@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit staff</title>
+</head>
+<body>
+<h1>Edit staff</h1>
+<p>
+    <a href="staffs">Home</a>
+</p>
+<p>
+    <a href="/create-department">Create department</a><br>
+
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/edit-staff}" th:object="${staff}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <td>Department:</td>
+        <td>
+            <select th:field="*{department}">
+                <option th:each="p : ${departments}" th:value="${p.id}"
+                        th:text="${p.nameDepartment}"></option>
+            </select>
+        </td>
+        <tr>
+            <td>Staff name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Birth Date:</td>
+            <td><input type="text" th:field="*{birthDate}"/></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" th:field="*{address}"/></td>
+        </tr>
+        <tr>
+            <td>Avatar:</td>
+            <td><img width="150px" height="200px" th:src="@{'/image/' + ${staff.avatar}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Avatar</td>
+            <td>    <p>Image: <input type="file" th:field="*{avatar}"/></p></td>
+        </tr>
+        <tr>
+            <td>Salary:</td>
+            <td><input type="text" th:field="*{salary}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update staff"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
